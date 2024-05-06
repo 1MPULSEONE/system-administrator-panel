@@ -1,9 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import './styles/index.css';
+import { Header } from './Header';
+import { Console } from './Console';
+import { Input } from './Input';
 
 function App() {
+
+  const [savedValue, setSavedValue] = useState([]);
   
+  const handleSavedValue = (newValue) => {
+    setSavedValue( [...savedValue,newValue]);
+  }
+
   const [state, setState] = useState(null);
 
   const callBackendAPI = async () => {
@@ -24,21 +34,14 @@ function App() {
   }, [])
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="flex h-screen w-screen">
+      <Header />
+      <div className='flex flex-col justify-center items-center w-full h-full'>
+         <Console  savedValue={savedValue} />
+         <Input  setSavedValue={handleSavedValue}/>
+      </div>
+      
+      
 
       {/* вывод данных, полученных с сервера Express */}
       <div>
