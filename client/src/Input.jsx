@@ -15,7 +15,7 @@ export const Input = ({ setSavedValue }) => {
       <div>
         <input
           onChange={handleInputChange}
-          className="w-64 px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
+          className="w-64 px-4 py-2 rounded-md border border-gray-500 focus:outline-none focus:border-blue-500"
           type="text"
           placeholder="Введите команду"
         />
@@ -23,7 +23,7 @@ export const Input = ({ setSavedValue }) => {
 
         <button
         onClick={handleSaveButtonClick}
-        className=' px-16 py-4 mt-5 bg-blue-500 text-white rounded-md shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50'>
+        className=' px-16 py-4 mt-5 bg-violet-700 text-white rounded-md shadow-md hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-violet-600 focus:ring-opacity-50'>
       </button>
         </div>
       </div>
