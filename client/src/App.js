@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import './styles/index.css';
-import { Header } from './Header';
-import { Console } from './Console';
-import { Input } from './Input';
+import { Header } from './components/Header';
+import { Console } from './components/Console';
+import { Input } from './components/Input';
 import './styles/index.css'
-import { Help } from './help';
+import { Help } from './components/help';
 
 function App() {
 
