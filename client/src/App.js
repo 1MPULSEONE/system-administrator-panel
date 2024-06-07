@@ -4,6 +4,8 @@ import { Console } from './components/Console';
 import { Input } from './components/Input';
 import './styles/index.css'
 import { Help } from './components/help';
+import { StatsProfile } from './components/StatsProfile';
+import { ProfilePage } from './components/ProfilePage';
 
 function App() {
 
@@ -43,7 +45,9 @@ function App() {
           <Console  savedValue={savedValue} />
           <Input  setSavedValue={handleSavedValue}/>
         </div>
+        
       </div>
+      <StatsProfile userName={'Ivan Ivanov'} timer={'1:30:14'}/>
     </div>
   );
 }

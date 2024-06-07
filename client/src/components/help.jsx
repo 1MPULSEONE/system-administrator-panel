@@ -8,11 +8,11 @@ export const Help = () => {
   const [netstatPopupVisible, setNetstatPopupVisible] = useState(false);
 
   return (
-<div className="flex flex-col items-center w-full h-full rounded-2xl justify-between">
-  <div className="bg-slate-400 w-full h-10 rounded-t-2xl flex justify-center items-center">
+<div className="flex flex-col items-center w-full h-[76.39%] rounded-2xl justify-between">
+  <div className="bg-slate-400 w-full h-10 rounded-t-3xl flex justify-center items-center">
   Сommand list
   </div>
-  <div className="bg-gray-700 h-full w-full rounded-b-2xl overflow-y-scroll no-scrollbar pt-4">
+  <div className="bg-gray-700 h-full w-full rounded-b-3xl overflow-y-scroll no-scrollbar pt-4">
     <div className="text-white flex flex-col gap-y-10 w-full">
       <div className={'flex flex-col  w-full'}>
         <ButtonComponent togglePopup={() => setPingPopupVisible(!pingPopupVisible)} isActive={pingPopupVisible} text={'Ping'} />
