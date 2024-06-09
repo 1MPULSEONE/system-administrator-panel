@@ -13,7 +13,7 @@ export const Header = () => {
         <div className='h-16 w-full fixed top-0 z-50'>
             <div className="h-full w-full flex flex-row justify-between items-center px-64 py-2 ">
                 <Link to={'https://omsu.ru/'} className='flex w-1/5 gap-x-3 flex-row items-center justify-start'>
-                    <img className='w-10 h-10' src={require("../assets/icon4.png")} alt="icon" />
+                    <img className='w-10 h-10' src={require("../assets/console_icon.png")} alt="icon" />
                     <p className=' text-3xl'>Omsu <span className={'text-slate-600'}>Network</span></p>
                 </Link>
                 <div className='flex flex-row w-3/5 self-center items-center justify-center gap-x-10'>

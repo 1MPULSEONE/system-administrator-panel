@@ -3,9 +3,8 @@ import { Header } from './components/Header';
 import { Console } from './components/Console';
 import { Input } from './components/Input';
 import './styles/index.css'
-import { Help } from './components/help';
+import { CommandList } from './components/CommandList';
 import { StatsProfile } from './components/StatsProfile';
-import { ProfilePage } from './components/ProfilePage';
 
 function App() {
 
@@ -39,7 +38,7 @@ function App() {
       <Header />
       <div className="flex flex-row justify-start mt-36 w-full pl-40 gap-x-36 items-start">
         <div className='flex flex-col items-start justify-start h-full w-1/6'>
-          <Help />
+          <CommandList />
         </div>
         <div className='flex flex-col justify-center gap-y-10 w-2/5 items-center'>
           <Console  savedValue={savedValue} />
