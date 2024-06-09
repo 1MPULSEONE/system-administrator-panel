@@ -34,7 +34,7 @@ function App() {
   }, [])
 
   return (
-    <div className="flex flex-col h-screen w-screen noise-background ">
+    <div className="flex flex-col h-screen w-screen noise-background">
       <Header />
       <div className="flex flex-row justify-start mt-36 w-full pl-40 gap-x-36 items-start">
         <div className='flex flex-col items-start justify-start h-full w-1/6'>
@@ -44,9 +44,7 @@ function App() {
           <Console  savedValue={savedValue} />
           <Input  setSavedValue={handleSavedValue}/>
         </div>
-        
       </div>
-      <StatsProfile userName={'Ivan Ivanov'} timer={'1:30:14'}/>
     </div>
   );
 }

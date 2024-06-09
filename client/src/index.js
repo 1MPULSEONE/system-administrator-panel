@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import {StatsPage} from "./pages/StatsPage";
 
 //TODO(dmtsai): add loader data for profile page
 export const RoutesPaths = {
@@ -20,7 +21,7 @@ const router = createBrowserRouter([
     },
     {
         path:  RoutesPaths.STATS,
-        element: <div>STATS SCREEN</div>
+        element: <StatsPage/>
     },
     {
         path: RoutesPaths.PROFILE,
