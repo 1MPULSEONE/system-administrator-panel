@@ -1,17 +1,17 @@
 const express = require('express');
 const ping = require('ping');
 const { exec } = require('child_process');
+const cors = require('cors')
 
 
 const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(express.json());
+app.use(cors());
 
 app.post('/ping', async (req, res) => {
-
   const { ip } = req.body;
-
   try {
     const result = await ping.promise.probe(ip);
     res.json(result.output);
@@ -27,23 +27,18 @@ app.post('/trace', async (req, res) => {
   let childProcess;
 
   try {
-    childProcess = exec('tracert ' + target);
+    childProcess = exec('tracert -h 1 ' + target);
   } catch (error) {
     console.error(error);
     res.status(500).send(error);
     return;
   }
-  let counter = 0;
   let result = '';
 
   childProcess.stdout.on('data', (data) => {
     console.log(data);
-    counter++;
     result = `${result} ${data} \n`
 
-    if (counter >= 2) {
-      childProcess.kill();
-    }
   });
 
   childProcess.on('close', (code) => {
