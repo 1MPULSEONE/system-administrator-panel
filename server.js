@@ -14,7 +14,7 @@ app.post('/ping', async (req, res) => {
   const { ip } = req.body;
   try {
     const result = await ping.promise.probe(ip);
-    res.json(result.output);
+    res.send(JSON.stringify({data:result}));
   } catch (error) {
     console.error('Error occurred during ping:', error);
     res.status(500).send('Error executing ping command');
@@ -37,13 +37,13 @@ app.post('/trace', async (req, res) => {
 
   childProcess.stdout.on('data', (data) => {
     console.log(data);
-    result = `${result} ${data} \n`
+    result += data
 
   });
 
   childProcess.on('close', (code) => {
     console.log(`Процесс закрыт с кодом ${code}`);
-    res.send(result);
+    res.send(JSON.stringify({data:result}));
   });
 });
 
@@ -67,7 +67,7 @@ app.post('/netstat', async (req, res) => {
 
   childProcess.on('close', (code) => {
     console.log(`Процесс закрыт с кодом ${code}`);
-    res.send(result);
+    res.send(JSON.stringify({data:result}));
   });
 });
 

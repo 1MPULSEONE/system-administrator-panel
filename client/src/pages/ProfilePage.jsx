@@ -3,7 +3,7 @@ import {usePingMutate} from "../api/mutations/ping";
 import {useNetstatMutate} from "../api/mutations/netstat";
 import {useEffect} from "react";
 
-export const ProfilePage  = () => {
+export const ProfilePage  =  () => {
     const {mutate:trace, isPending: isTracePending, isSuccess:isTraceSuccess,data:traceData} = useTraceMutate();
     const {mutate:ping, isPending: isPingPending, isSuccess:isPingSuccess,data:pingData} = usePingMutate();
     const {mutate:netstat, isPending: isNetstatPending, isSuccess: isNetstatSuccess,data:netstatData} = useNetstatMutate();
@@ -13,7 +13,7 @@ export const ProfilePage  = () => {
         {
             console.log(netstatData)
         }
-    }, [netstatData,netstat]);
+    }, [netstatData,netstat,isNetstatSuccess]);
 
     useEffect(() => {
         if( isPingSuccess)
@@ -27,7 +27,7 @@ export const ProfilePage  = () => {
         {
             console.log(traceData)
         }
-    }, [traceData,trace,isTraceSuccess]);
+    }, [traceData,trace,isTraceSuccess,]);
 
 
 
