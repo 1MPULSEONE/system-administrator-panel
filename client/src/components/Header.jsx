@@ -1,6 +1,6 @@
 import '../styles/index.css'
 import {Link, useLocation} from "react-router-dom";
-import {RoutesPaths} from "../index";
+import  { RoutesPaths} from '../App';
 
 
 const isActive = ({to,pathname}) => {

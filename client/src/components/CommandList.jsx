@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { DropDown } from "./DropDown";
 import { ItemButton } from "./ItemButton";
+import {useTraceMutate} from "../api/mutations/trace";
 
 export const CommandList = () => {
   const [popups, setPopups] = useState({

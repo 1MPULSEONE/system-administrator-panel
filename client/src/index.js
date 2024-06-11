@@ -3,36 +3,11 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {createBrowserRouter, RouterProvider} from "react-router-dom";
-import {StatsPage} from "./pages/StatsPage";
 
-//TODO(dmtsai): add loader data for profile page
-export const RoutesPaths = {
-    CONSOLE: '/',
-    STATS: '/stats',
-    // PROFILE: (login) => `/profile:${login}`,
-    PROFILE : '/profile'
-}
-
-const router = createBrowserRouter([
-    {
-        path: RoutesPaths.CONSOLE,
-        element: <App/>
-    },
-    {
-        path:  RoutesPaths.STATS,
-        element: <StatsPage/>
-    },
-    {
-        path: RoutesPaths.PROFILE,
-        element: <div>PROFILE SCREEN</div>
-    }
-    ]
-)
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-      <RouterProvider router={router} />
+    <App/>
   </React.StrictMode>
 );
 
