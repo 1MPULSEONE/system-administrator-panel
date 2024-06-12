@@ -5,32 +5,42 @@ import {StatsPage} from "./pages/StatsPage";
 import {ProfilePage} from "./pages/ProfilePage";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import {ConsolePage} from "./pages/ConsolePage";
+import {AuthPage} from "./pages/AuthPage";
+import {Layout} from "./pages/Layout";
 
 export const RoutesPaths = {
-    CONSOLE: '/',
+    CONSOLE: '/console',
     STATS: '/stats',
-    // PROFILE: (login) => `/profile:${login}`,
-    PROFILE : '/profile'
+    PROFILE : '/profile',
+    AUTH: '/auth'
 }
 
-
 const router = createBrowserRouter([
-        {
-            path: RoutesPaths.CONSOLE,
-            element: <ConsolePage/>
-        },
-        {
-            path:  RoutesPaths.STATS,
-            element: <StatsPage/>
-        },
-        {
+    {
+        path: '',
+        element: <Layout/>,
+        children: [
+            {
+                path: RoutesPaths.AUTH,
+                element: <AuthPage/>,
+            },
+            {
+                path: RoutesPaths.CONSOLE,
+                element: <ConsolePage/>
+            },
+            {
+                path: RoutesPaths.STATS,
+                element: <StatsPage/>
+            },
+            {
             path: RoutesPaths.PROFILE,
             element: <ProfilePage/>
 
+            },
+        ]
+    }
 
-        }
-    ]
-)
+])
 const queryClient = new QueryClient();
 
 function App() {
