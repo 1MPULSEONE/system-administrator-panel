@@ -18,14 +18,13 @@ export const useTraceMutate = () => {
                 body:  JSON.stringify(requestBody) ,
             });
 
-                const body = await response;
-                console.log(body);
+                const body = await response.json();
 
                 if (response.status !== 200) {
                     throw Error(body.message)
                 }
 
-                return body.json();
+                return body;
             }
         })
 }
