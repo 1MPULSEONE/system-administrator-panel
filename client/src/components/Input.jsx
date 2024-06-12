@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export const Input = ({ setSavedValue }) => {
+export const Input = ({ setCurrentCommand }) => {
   const [inputValue, setInputValue] = useState("");
   
   const handleInputChange = (event) => {
@@ -8,7 +8,7 @@ export const Input = ({ setSavedValue }) => {
   };
 
   const handleSaveButtonClick = () => {
-    setSavedValue(inputValue);
+    setCurrentCommand(inputValue);
     setInputValue("");
     
   };
@@ -17,7 +17,7 @@ export const Input = ({ setSavedValue }) => {
     const listener = event => {
       if (event.code === "Enter" || event.code === "NumpadEnter") {
         event.preventDefault();
-        setSavedValue(inputValue);
+          setCurrentCommand(inputValue);
         setInputValue("");
       }
     };
@@ -25,7 +25,7 @@ export const Input = ({ setSavedValue }) => {
     return () => {
       document.removeEventListener("keydown", listener);
     };
-  }, [inputValue,setSavedValue]);
+  }, [inputValue,setCurrentCommand]);
   const clearInput = (target)=> {
     if (target.value === 'clear input'){
         target.value= "";
