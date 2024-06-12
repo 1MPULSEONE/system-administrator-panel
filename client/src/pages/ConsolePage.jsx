@@ -13,7 +13,7 @@ export const  ConsolePage  = () => {
     const [currentCommand,setCurrentCommand] = useState(undefined);
 
     const handleSavedValue = (newValue) => {
-        setSavedValue( [...savedValue,newValue]);
+        setSavedValue( prev=>[...prev,newValue]);
     }
 
     const [state, setState] = useState(null);
@@ -48,26 +48,19 @@ export const  ConsolePage  = () => {
             }
         }
 
-        if(isTracePending || isPingPending || isNetstatPending) {
-            //loader
-            console.log("LOADING");
-        }
-
         if ( isTraceSuccess &&  traceData.data ) {
-            setSavedValue(prev => [...prev,'RESULT', traceData.data]);
+            return  traceData.data
         }
 
-        if( isPingSuccess && pingData.data.output) {
-            setSavedValue(prev => [...prev,'RESULT', pingData.data.output]);
-
+        if ( isPingSuccess && pingData.data.output) {
+           return  pingData.data.output
         }
 
         if ( isNetstatSuccess &&  netstatData.data ) {
-            setSavedValue(prev => [...prev,'RESULT', netstatData.data]);
-
+           return  netstatData.data
         }
 
-
+        return undefined;
     }
     // получение GET маршрута с сервера Express, который соответствует GET из server.js
     useEffect(() => {
@@ -77,32 +70,29 @@ export const  ConsolePage  = () => {
     }, [])
 
     useEffect(() => {
-        if(!!savedValue.at(-1)) {
-            const stringifyCommand = savedValue.at(-1).split(' ')
-
+        console.log('SAVED VAL',savedValue)
+        if(savedValue.length > 0 && !currentCommand) {
+            const stringifyCommand = savedValue[savedValue.length - 1].split(' ')
             const parsedCommand = {
                 command: stringifyCommand[0],
                 option:  stringifyCommand[1]
             }
-
             setCurrentCommand(parsedCommand);
-
         }
-        console.log('SAVED VAL',savedValue)
-
-
     }, [savedValue]);
 
     useEffect(() => {
 
-        if(currentCommand !== undefined) {
+        if(currentCommand) {
             console.log('CRT CMD', currentCommand);
-             getData(currentCommand)
+            const result =   getData(currentCommand)
+            if(result) {
+                setSavedValue(prev =>[...prev,'RESULT',result]);
+            }
             setCurrentCommand(undefined)
         }
 
-
-    }, [currentCommand]);
+    }, [isTraceSuccess, isPingSuccess, isNetstatSuccess,savedValue]);
 
     return (
         <div className="flex flex-col h-screen w-screen noise-background">
