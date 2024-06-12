@@ -3,32 +3,43 @@ import {Header} from "../components/Header";
 import {CommandList} from "../components/CommandList";
 import {Console} from "../components/Console";
 import {Input} from "../components/Input";
+import {useTraceMutate} from "../api/mutations/trace";
+import {usePingMutate} from "../api/mutations/ping";
+import {useNetstatMutate} from "../api/mutations/netstat";
 
 export const  ConsolePage  = () => {
-    const [savedValue, setSavedValue] = useState([]);
 
-    const handleSavedValue = (newValue) => {
-        setSavedValue( [...savedValue,newValue]);
-    }
+    const [savedValue, setSavedValue] = useState(undefined);
+    const [currentCommand,setCurrentCommand] = useState(undefined);
 
-    const [state, setState] = useState(null);
+    useEffect(()=> {
+        if(currentCommand) {
+            const fetchData = async () => {
+                const cmd = currentCommand.split(' ');
+                const requestBody = {
+                    ip: cmd[1],
+                };
+                const data = await fetch(`http://localhost:5000/${cmd[0]}`, {
+                    mode: 'cors',
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json; charset=utf-8'},
+                    body: JSON.stringify(requestBody)
+                })
+                const body = await data.json()
+                console.log(body.data.output);
 
-    const callBackendAPI = async () => {
-        const response = await fetch('/express_backend');
-        const body = await response.json();
+                if (body && cmd[0] === 'ping') {
+                    setSavedValue(body.data.output);
+                }
+                if (body && cmd[0] !== 'ping') {
+                    setSavedValue(body.data);
+                }
+            }
+            fetchData().catch(console.error);
 
-        if (response.status !== 200) {
-            throw Error(body.message)
         }
-        return body;
-    };
 
-    // получение GET маршрута с сервера Express, который соответствует GET из server.js
-    useEffect(() => {
-        callBackendAPI()
-            .then(res => setState(res.express))
-            .catch(err => console.log(err));
-    }, [])
+    },[currentCommand])
 
     return (
         <div className="flex flex-col h-screen w-screen noise-background">
@@ -39,7 +50,7 @@ export const  ConsolePage  = () => {
                 </div>
                 <div className='flex flex-col justify-center gap-y-10 w-2/5 items-center'>
                     <Console  savedValue={savedValue} />
-                    <Input  setSavedValue={handleSavedValue}/>
+                    <Input  setCurrentCommand={setCurrentCommand}/>
                 </div>
             </div>
         </div>
