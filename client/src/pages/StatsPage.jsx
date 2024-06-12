@@ -3,34 +3,29 @@ import {StatsProfile} from "../components/StatsProfile";
 
 const data  = [
     {
-        login: 'ZXCMonstr1337',
+        login: 'parkhomenko2049@gmail.com',
         status: 'online',
         time:  new Date().toDateString(),
     },
     {
-        login: 'Salfetka',
+        login: 'raft.arenda@mail.ru',
         status: 'offline',
-        time:  new Date().toDateString(),
+        time:  new Date(2024,6,12).toDateString(),
     },
     {
-        login: 'ZXCMonstr1337',
-        status: 'online',
-        time:  new Date().toDateString(),
-    },
-    {
-        login: 'Salfetka',
+        login: 'kostya.pashkov.90@mail.ru',
         status: 'offline',
-        time: new Date().toDateString(),
+        time:  new Date(2024,6,11).toDateString(),
     },
     {
-        login: 'ZXCMonstr1337',
-        status: 'online',
-        time:  new Date().toDateString(),
-    },
-    {
-        login: 'Salfetka',
+        login: 'arusaeva76@gmail.com',
         status: 'offline',
-        time:  new Date().toDateString(),
+        time:new Date(2024,6,12).toDateString(),
+    },
+    {
+        login: 'cfyz1553@mail.ru',
+        status: 'offline',
+        time: new Date(2024,6,12).toDateString(),
     },
 ]
 
