@@ -1,54 +1,54 @@
-import React, { useEffect, useState } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import './styles/index.css';
-import { Header } from './Header';
-import { Console } from './Console';
-import { Input } from './Input';
+import React from 'react';
 import './styles/index.css'
-import { Help } from './help';
+import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import {StatsPage} from "./pages/StatsPage";
+import {ProfilePage} from "./pages/ProfilePage";
+import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
+import {ConsolePage} from "./pages/ConsolePage";
+import {AuthPage} from "./pages/AuthPage";
+import {Layout} from "./pages/Layout";
+
+export const RoutesPaths = {
+    CONSOLE: '/console',
+    STATS: '/stats',
+    PROFILE : '/profile',
+    AUTH: '/auth'
+}
+
+const router = createBrowserRouter([
+    {
+        path: '',
+        element: <Layout/>,
+        children: [
+            {
+                path: RoutesPaths.AUTH,
+                element: <AuthPage/>,
+            },
+            {
+                path: RoutesPaths.CONSOLE,
+                element: <ConsolePage/>
+            },
+            {
+                path: RoutesPaths.STATS,
+                element: <StatsPage/>
+            },
+            {
+            path: RoutesPaths.PROFILE,
+            element: <ProfilePage/>
+
+            },
+        ]
+    }
+
+])
+const queryClient = new QueryClient();
 
 function App() {
-
-  const [savedValue, setSavedValue] = useState([]);
-  
-  const handleSavedValue = (newValue) => {
-    setSavedValue( [...savedValue,newValue]);
-  }
-
-  const [state, setState] = useState(null);
-
-  const callBackendAPI = async () => {
-    const response = await fetch('/express_backend');
-    const body = await response.json();
-
-    if (response.status !== 200) {
-      throw Error(body.message)
-    }
-    return body;
-  };
-  
-  // получение GET маршрута с сервера Express, который соответствует GET из server.js 
-  useEffect(() => {
-    callBackendAPI()
-    .then(res => setState(res.express))
-    .catch(err => console.log(err));
-  }, [])
-
-  return (
-    <div className="flex flex-col h-screen w-screen noise-background ">
-      <Header />
-      <div className="flex flex-row justify-start mt-36 w-full pl-40 gap-x-36 items-start">
-        <div className='flex flex-col items-start justify-start h-full w-1/6'>
-          <Help />
-        </div>
-        <div className='flex flex-col justify-center gap-y-10 w-2/5 items-center'>
-          <Console  savedValue={savedValue} />
-          <Input  setSavedValue={handleSavedValue}/>
-        </div>
-      </div>
-    </div>
-  );
+    return (
+        <QueryClientProvider client={queryClient}>
+            <RouterProvider router={router} />
+        </QueryClientProvider>
+    )
 }
 
 export default App;
